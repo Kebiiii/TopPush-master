@@ -1,9 +1,8 @@
+(https://jitpack.io/#Kebiiii/TopPush)
 
-[![](https://jitpack.io/v/joyrun/MixPush.svg)](https://jitpack.io/#joyrun/MixPush)
+### TopPush SDK融合多家推送平台，小米推送、魅族推送、个推等，在MIUI和Flyme OS共享系统级推送，杀死APP也能收到推送消息。
 
-### MixPush SDK融合多家推送平台，小米推送、魅族推送、个推等，在MIUI和Flyme OS共享系统级推送，杀死APP也能收到推送消息。
-
-消息推送是App运营的重要一环，为了优化消息推送成功率，降低电量和流量消耗，系统级的推送服务显得尤为重要。小米和魅族由此推出了自家的推送平台，在MIUI和Flyme上共享系统级推送服务，让APP在被杀死的情况下也能正常收到推送消息。以后也会有越来越多的手机厂商会推出自己的推送平台，MixPush由此而生，降低开发者集成多家推送的开发成本，提高推送的到达率。
+消息推送是App运营的重要一环，为了优化消息推送成功率，降低电量和流量消耗，系统级的推送服务显得尤为重要。小米和魅族由此推出了自家的推送平台，在MIUI和Flyme上共享系统级推送服务，让APP在被杀死的情况下也能正常收到推送消息。以后也会有越来越多的手机厂商会推出自己的推送平台，TopPush由此而生，降低开发者集成多家推送的开发成本，提高推送的到达率。
 
 
 #### 推荐推送平台
@@ -22,7 +21,7 @@ http://www.getui.com/cn/index.html
 ##### 原理图
  ![image](logic_chart.jpg)
 ##### 原理分析
-MixPush只是一个降低集成多家推送服务的框架，自身不拥有推送功能，所有的推送功能都是依靠各个推送平台来实现。从原理图可以看到，客户端APP会根据不同的手机注册不同的推送平台，不能同时注册两个推送服务，避免重复收到推送。而服务端不用考虑需要推送消息的用户手机属于何种平台，一律向各个平台发起推送，而客户端会根据注册的平台只会收到单一平台的推送消息。
+TopPush只是一个降低集成多家推送服务的框架，自身不拥有推送功能，所有的推送功能都是依靠各个推送平台来实现。从原理图可以看到，客户端APP会根据不同的手机注册不同的推送平台，不能同时注册两个推送服务，避免重复收到推送。而服务端不用考虑需要推送消息的用户手机属于何种平台，一律向各个平台发起推送，而客户端会根据注册的平台只会收到单一平台的推送消息。
 
 
 #### Android客户端配置
@@ -39,25 +38,20 @@ MixPush只是一个降低集成多家推送服务的框架，自身不拥有推�
 选择推送平台，如果没有可以参考源码自行实现，添加依赖：
 ```
 
-dependencies {
-    compile 'com.github.joyrun.MixPush:client-core:1.2.0' //必填
-    compile 'com.github.joyrun.MixPush:client-mipush:1.2.0' // 小米推送
-    compile 'com.github.joyrun.MixPush:client-getui:1.2.0' // 个推
-    compile 'com.github.joyrun.MixPush:client-meizu:1.2.0' // 魅族推送，魅族推送只支持Flyme系统，务必需要注意
-}
+
 ```
-创建一个继承MixPushIntentService的服务类，用于接收事件：
+创建一个继承TopPushIntentService的服务类，用于接收事件：
 
 ```
 
-public class PushIntentService extends MixPushIntentService {
+public class PushIntentService extendsTopPushIntentService {
     @Override
-    public void onReceivePassThroughMessage(MixPushMessage message) {
+    public void onReceivePassThroughMessage(TopPushMessage message) {
         Log.e(TAG, "收到透传消息 -> " + message.getContent());
     }
 
     @Override
-    public void onNotificationMessageClicked(MixPushMessage message) {
+    public void onNotificationMessageClicked(TopPushMessage message) {
         Log.e(TAG, "通知栏消息点击 -> " + message.getContent());
     }
 }
@@ -88,26 +82,26 @@ public class DemoApplication extends Application {
         initPush();
     }
     private void initPush() {
-        MixPushClient.addPushManager(new MeizuPushManager(MEIZU_APP_KEY, MEIZU_APP_ID));
-        MixPushClient.addPushManager(new MiPushManager(MIPUSH_APP_ID, MIPUSH_APP_KEY));
-        MixPushClient.addPushManager(new GeTuiManager());
-        MixPushClient.setPushIntentService(PushIntentService.class);
-        MixPushClient.setSelector(new MixPushClient.Selector() {
+        TOPPushClient.addPushManager(new MeizuPushManager(MEIZU_APP_KEY, MEIZU_APP_ID));
+        TOPPushClient.addPushManager(new MiPushManager(MIPUSH_APP_ID, MIPUSH_APP_KEY));
+        TOPPushClient.addPushManager(new GeTuiManager());
+        TOPPushClient.setPushIntentService(PushIntentService.class);
+        TOPPushClient.setSelector(new TopPushClient.Selector() {
             @Override
-            public String select(Map<String, MixPushManager> pushAdapterMap, String brand) {
+            public String select(Map<String, TopPushManager> pushAdapterMap, String brand) {
                 // return GeTuiManager.NAME;
                 //底层已经做了小米推送、魅族推送、个推判断，也可以按照自己的需求来选择推送
                 return super.select(pushAdapterMap, brand);
             }
         });
         // 配置接收推送消息的服务类
-        MixPushClient.setPushIntentService(PushIntentService.class);
+        TOPPushClient.setPushIntentService(PushIntentService.class);
         // 注册推送
-        MixPushClient.registerPush(this);
+        TOPPushClient.registerPush(this);
         // 绑定别名，一般是填写用户的ID，便于定向推送
-        MixPushClient.setAlias(this, getUserId());
+        TOPPushClient.setAlias(this, getUserId());
         // 设置标签，用于对用户进行划分
-        MixPushClient.setTags(this,"广东");
+        TOPPushClient.setTags(this,"广东");
     }
     private String getUserId(){
         return "103";
@@ -121,10 +115,15 @@ android {
     defaultConfig {
         ...
         manifestPlaceholders = [
-                GETUI_APP_ID : "<GETUI_APP_ID>",
-                GETUI_APP_KEY : "<GETUI_APP_KEY>",
-                GETUI_APP_SECRET : "<GETUI_APP_SECRET>",
-                PACKAGE_NAME: "<APP的包名>"
+                GETUI_APP_ID : "dNayRXUcuF9fUs8S5eoBZ3",
+                GETUI_APP_KEY : "OyTkQFofoN8kucoRkHIYy3",
+                GETUI_APP_SECRET : "xKe0E5uCdZ8rElueDuZx87",
+                HUAWEI_APPID : "100116985",
+                MEIZU_APP_ID : "111519",
+                MEIZU_APP_KEY : "004f87a6c9694134ade8f9d5a61a2950",
+                MIPUSH_APP_ID : "2882303761517630293",
+                MIPUSH_APP_KEY : "5271763038293",
+                PACKAGE_NAME: "com.toppush.demo"
         ]
     }
 }
@@ -164,7 +163,7 @@ xxhdpi:  192*192
 ##### 服务端推送测试
 
 ```
-public class MixPushServerTest {
+public class TOPPushServerTest {
     public static final String APP_PACKAGE_NAME = "<APP的包名>";
     public static final String MIPUSH_APP_SECRET_KEY = "<MIPUSH_APP_SECRET_KEY>";
 
@@ -176,36 +175,36 @@ public class MixPushServerTest {
     public static final String GETUI_MASTER_SECRET = "<GETUI_MASTER_SECRET>";
     public static final String GETUI_URL = "http://sdk.open.api.igexin.com/apiex.htm";
     static {
-        MixPushServer.addPushServerManager(new MiPushServerManager(APP_PACKAGE_NAME, MIPUSH_APP_SECRET_KEY));
-        MixPushServer.addPushServerManager(new MeizuPushServerManager(MEIZU_APP_ID, MEIZU_APP_SECRET_KEY));
-        MixPushServer.addPushServerManager(new GeTuiPushServerManager(GETUI_APP_ID, GETUI_APP_KEY, GETUI_MASTER_SECRET, GETUI_URL));
+        TopPushServer.addPushServerManager(new MiPushServerManager(APP_PACKAGE_NAME, MIPUSH_APP_SECRET_KEY));
+        TopPushServer.addPushServerManager(new MeizuPushServerManager(MEIZU_APP_ID, MEIZU_APP_SECRET_KEY));
+        TopPushServer.addPushServerManager(new GeTuiPushServerManager(GETUI_APP_ID, GETUI_APP_KEY, GETUI_MASTER_SECRET, GETUI_URL));
     }
     String title = "title";
     String description = "description";
     String json = "{\"name\":\"Wiki\",\"age\":24}";
     @Test
     public void sendNotifyToAll() throws Exception {
-        MixPushServer.sendNotifyToAll(title, description, json);
+        TopPushServer.sendNotifyToAll(title, description, json);
     }
     @Test
     public void sendMessageToAll() throws Exception {
-        MixPushServer.sendMessageToAll(json);
+        TopPushServer.sendMessageToAll(json);
     }
     @Test
     public void sendMessageToAlias() throws Exception {
-        MixPushServer.sendMessageToAlias("100", json);
+        TopPushServer.sendMessageToAlias("100", json);
     }
     @Test
     public void sendMessageToTags() throws Exception {
-        MixPushServer.sendMessageToTags("广东", json);
+        TopPushServer.sendMessageToTags("广东", json);
     }
     @Test
     public void sendNotifyToAlias() throws Exception {
-        MixPushServer.sendNotifyToAlias("100", title, description, json);
+        TopPushServer.sendNotifyToAlias("100", title, description, json);
     }
     @Test
     public void sendNotifyToTags() throws Exception {
-        MixPushServer.sendNotifyToTags("广东", title, description, json);
+        TopPushServer.sendNotifyToTags("广东", title, description, json);
     }
 }
 ```

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.mixpush.demo"
+        applicationId "com.toppush.demo"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
@@ -12,11 +12,21 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders = [
-                GETUI_APP_ID : "51xb25cmJx9I28wet1Rtd5",
-                GETUI_APP_KEY : "Wq0MtiYBdO7YwpTLbR8iI3",
-                GETUI_APP_SECRET : "nhdQScPkIyAu1MSoL7qSu6",
-                PACKAGE_NAME: "com.mixpush.demo"
+                GETUI_APP_ID : "dNayRXUcuF9fUs8S5eoBZ3",
+                GETUI_APP_KEY : "OyTkQFofoN8kucoRkHIYy3",
+                GETUI_APP_SECRET : "xKe0E5uCdZ8rElueDuZx87",
+                HUAWEI_APPID : "100116985",
+                MEIZU_APP_ID : "111519",
+                MEIZU_APP_KEY : "004f87a6c9694134ade8f9d5a61a2950",
+                MIPUSH_APP_ID : "2882303761517630293",
+                MIPUSH_APP_KEY : "5271763038293",
+                PACKAGE_NAME: "com.toppush.demo"
         ]
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64', 'armeabi-v8a'
+        }
     }
     buildTypes {
         release {
@@ -43,9 +53,10 @@ dependencies {
     compile project(':client-mipush')
     compile project(':client-getui')
     compile project(':client-meizu')
+    compile project(':client-huawei')
 
-//    compile 'com.github.joyrun.MixPush:client-core:1.1.0'
-//    compile 'com.github.joyrun.MixPush:client-mipush:1.1.0'
-//    compile 'com.github.joyrun.MixPush:client-getui:1.1.0'
-//    compile 'com.github.joyrun.MixPush:client-meizu:1.1.0'//魅族推送只支持Flyme系统，务必需要注意
+//    compile 'com.github.joyrun.TopPush:client-core:1.1.0'
+//    compile 'com.github.joyrun.TopPush:client-mipush:1.1.0'
+//    compile 'com.github.joyrun.TopPush:client-getui:1.1.0'
+//    compile 'com.github.joyrun.TopPush:client-meizu:1.1.0'//魅族推送只支持Flyme系统，务必需要注意
 }

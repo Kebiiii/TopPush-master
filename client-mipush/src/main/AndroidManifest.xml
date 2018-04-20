@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="com.mixpush.client.mipush">
+    package="com.toppush.client.mipush">
     <!--小米-->
     <permission android:name="${PACKAGE_NAME}.permission.MIPUSH_RECEIVE" android:protectionLevel="signature" />
     <uses-permission android:name="${PACKAGE_NAME}.permission.MIPUSH_RECEIVE" />
@@ -43,7 +43,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".MiPushMessageReceiver"
+            android:name="com.toppush.client.mipush.MiPushMessageReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
@@ -55,6 +55,14 @@
                 <action android:name="com.xiaomi.mipush.ERROR" />
             </intent-filter>
         </receiver>
+
+        <meta-data
+            android:name="com.thinmoo.toppush.MIPUSH_APP_ID"
+            android:value="toppush${MIPUSH_APP_ID}"/>
+
+        <meta-data
+            android:name="com.thinmoo.toppush.MIPUSH_APP_KEY"
+            android:value="toppush${MIPUSH_APP_KEY}"/>
         <!--小米推送 结束-->
     </application>
 

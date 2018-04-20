@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/client-core" />
             <option value="$PROJECT_DIR$/client-getui" />
+            <option value="$PROJECT_DIR$/client-huawei" />
             <option value="$PROJECT_DIR$/client-meizu" />
             <option value="$PROJECT_DIR$/client-mipush" />
             <option value="$PROJECT_DIR$/demo" />

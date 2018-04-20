@@ -17,6 +17,8 @@ allprojects {
         jcenter()
         maven {url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/"}
         maven { url 'https://jitpack.io' }
+        maven {url 'http://developer.huawei.com/repo/'}
+//        maven{ url 'https://oss.jfrog.org/artifactory/oss-snapshot-local' }
     }
 }
 

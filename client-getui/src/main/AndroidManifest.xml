@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="com.mixpush.client.getui">
+    package="com.toppush.client.getui">
 
     <application>
-        <service android:name=".GeTuiMessageIntentService"/>
+        <service android:name="com.toppush.client.getui.GeTuiMessageIntentService"/>
     </application>
 
 </manifest>

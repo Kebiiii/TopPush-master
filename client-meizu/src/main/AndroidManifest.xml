@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="com.mixpush.client.meizu">
+    package="com.toppush.client.meizu">
 
 
     <!-- 兼容flyme5.0以下版本，魅族内部集成pushSDK必填，不然无法收到消息-->
@@ -18,7 +18,7 @@
     <application>
 
         <!-- push应用定义消息receiver声明 -->
-        <receiver android:name=".MeizuPushMsgReceiver">
+        <receiver android:name="com.toppush.client.meizu.MeizuPushMsgReceiver">
             <intent-filter>
                 <!-- 接收push消息 -->
                 <action android:name="com.meizu.flyme.push.intent.MESSAGE" />
@@ -32,27 +32,15 @@
 
                 <category android:name="${PACKAGE_NAME}"/>
             </intent-filter>
-
-            <meta-data
-                android:name="APP_ID"
-                android:value="110697"/>
-
-            <meta-data
-                android:name="APP_KEY"
-                android:value="b39d231fc8a14043a556f56881f56e3b"/>
-
-
-
-            <!--<meta-data-->
-                <!--android:name="APP_ID"-->
-                <!--android:value="${MEIZU_PUSH_APP_ID}"/>-->
-
-            <!--<meta-data-->
-                <!--android:name="APP_KEY"-->
-                <!--android:value="${MEIZU_PUSH_APP_KEY}"/>-->
-            <!---->
-            <!---->
         </receiver>
+
+        <meta-data
+            android:name="com.thinmoo.toppush.MEIZU_APP_ID"
+            android:value="toppush${MEIZU_APP_ID}"/>
+
+        <meta-data
+            android:name="com.thinmoo.toppush.MEIZU_APP_KEY"
+            android:value="toppush${MEIZU_APP_KEY}"/>
     </application>
 
 </manifest>
