@@ -2,7 +2,7 @@ package com.toppush.server;
 
 import java.util.List;
 
-public interface MixPushServerManager {
+public interface TopPushServerManager {
 
     void sendMessageToAlias(List<String> alias, String messagePayload) throws Exception;
 

@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by Wiki on 2017/6/1.
  */
 
-public class MeizuPushServerManager implements MixPushServerManager {
+public class MeizuPushServerManager implements TopPushServerManager {
     private Long appId;
     private String appSecretKey;
 

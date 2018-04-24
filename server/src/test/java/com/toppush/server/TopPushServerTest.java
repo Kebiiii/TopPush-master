@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Wiki on 2017/6/1.
  */
-public class MixPushServerTest {
+public class TopPushServerTest {
 
 
     public static final String APP_PACKAGE_NAME = "com.toppush.demo";
@@ -26,9 +26,9 @@ public class MixPushServerTest {
     static List<String> tags = new ArrayList<>();
 
     static {
-        MixPushServer.addPushServerManager(new GeTuiPushServerManager(GETUI_APP_ID, GETUI_APP_KEY, GETUI_MASTER_SECRET, GETUI_URL));
-        MixPushServer.addPushServerManager(new MeizuPushServerManager(MEIZU_APP_ID, MEIZU_APP_SECRET_KEY));
-        MixPushServer.addPushServerManager(new MiPushServerManager(APP_PACKAGE_NAME, MIPUSH_APP_SECRET_KEY));
+        TopPushServer.addPushServerManager(new GeTuiPushServerManager(GETUI_APP_ID, GETUI_APP_KEY, GETUI_MASTER_SECRET, GETUI_URL));
+        TopPushServer.addPushServerManager(new MeizuPushServerManager(MEIZU_APP_ID, MEIZU_APP_SECRET_KEY));
+        TopPushServer.addPushServerManager(new MiPushServerManager(APP_PACKAGE_NAME, MIPUSH_APP_SECRET_KEY));
 
 
 
@@ -44,53 +44,53 @@ public class MixPushServerTest {
 
     @Test
     public void sendNotifyToAll() throws Exception {
-        MixPushServer.sendNotifyToAll(title, description, json);
+        TopPushServer.sendNotifyToAll(title, description, json);
     }
 
     @Test
     public void sendMessageToAll() throws Exception {
-        MixPushServer.sendMessageToAll(json);
+        TopPushServer.sendMessageToAll(json);
     }
 
     @Test
     public void sendMessageToAlias() throws Exception {
-        MixPushServer.sendMessageToAlias(alias, json);
+        TopPushServer.sendMessageToAlias(alias, json);
     }
 
     @Test
     public void sendMessageToTags() throws Exception {
-        MixPushServer.sendMessageToTags(tags, json);
+        TopPushServer.sendMessageToTags(tags, json);
     }
 
     @Test
     public void sendNotifyToAlias() throws Exception {
-        MixPushServer.sendNotifyToAlias(alias, title, description, json);
+        TopPushServer.sendNotifyToAlias(alias, title, description, json);
     }
 
     @Test
     public void sendNotifyToTags() throws Exception {
-        MixPushServer.sendNotifyToTags(tags, title, description, json);
+        TopPushServer.sendNotifyToTags(tags, title, description, json);
     }
 
 
 //    @Test
 //    public void sendNotifyOpenWebViewToAlias() throws Exception {
-//        MixPushServer.sendNotifyToAlias(alias, title, description, "{\"option\":\"web\",\"url\":\"http://baidu.com\"}");
+//        TopPushServer.sendNotifyToAlias(alias, title, description, "{\"option\":\"web\",\"url\":\"http://baidu.com\"}");
 //    }
 
 
     @Test
     public void sendNotifyLinkToAlias() throws Exception {
-        MixPushServer.sendLinkNotifyToAlias(alias, title, description, url);
+        TopPushServer.sendLinkNotifyToAlias(alias, title, description, url);
     }
 
     @Test
     public void sendNotifyLinkToTags() throws Exception {
-        MixPushServer.sendLinkNotifyToTags(tags, title, description, url);
+        TopPushServer.sendLinkNotifyToTags(tags, title, description, url);
     }
 
     @Test
     public void sendNotifyLinkToAll() throws Exception {
-        MixPushServer.sendLinkNotifyToAll(title, description, url);
+        TopPushServer.sendLinkNotifyToAll(title, description, url);
     }
 }

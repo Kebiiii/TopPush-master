@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Wiki on 2017/6/1.
  */
 
-public class MiPushServerManager implements MixPushServerManager {
+public class MiPushServerManager implements TopPushServerManager {
     private final String appPackageName;
     private final String appSecretKey;
 

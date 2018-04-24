@@ -24,7 +24,7 @@ import java.util.List;
  * Created by Wiki on 2017/6/1.
  */
 
-public class GeTuiPushServerManager implements MixPushServerManager {
+public class GeTuiPushServerManager implements TopPushServerManager {
     //定义常量, appId、appKey、masterSecret 采用本文档 "第二步 获取访问凭证 "中获得的应用配置
     private String appId;
     private String appKey;
